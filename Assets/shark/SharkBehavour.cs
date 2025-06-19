@@ -1,0 +1,104 @@
+using UnityEngine;
+
+public class SharkBehavour : MonoBehaviour
+{
+    public float patrolSpeed = 3f;
+    public float chaseSpeed = 6f;
+    public float patrolRadius = 10f;
+    public float detectionRadius = 15f;
+    public float attackDistance = 2f;
+    public float patrolTurnSpeed = 30f;
+
+    public Transform player; // Exposed in inspector
+
+    private Animator animator;
+    private Vector3 patrolCenter;
+    private float patrolAngle = 0f;
+    private bool isAttacking = false;
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        if (player == null)
+            player = GameObject.FindGameObjectWithTag("Player")?.transform;
+        animator = GetComponent<Animator>();
+        patrolCenter = transform.position;
+        // Start swimming animation
+        if (animator != null)
+            animator.SetBool("Swimming", true);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (player == null)
+            return;
+
+        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+
+        if (distanceToPlayer <= detectionRadius)
+        {
+            // Chase player
+            ChasePlayer(distanceToPlayer);
+        }
+        else
+        {
+            // Patrol in a circle
+            Patrol();
+        }
+    }
+
+    void Patrol()
+    {
+        if (animator != null)
+        {
+            animator.SetBool("Swimming", true);
+            animator.SetBool("Biting", false);
+        }
+        isAttacking = false;
+
+        patrolAngle += patrolTurnSpeed * Time.deltaTime;
+        float rad = patrolAngle * Mathf.Deg2Rad;
+        Vector3 offset = new Vector3(Mathf.Cos(rad), 0, Mathf.Sin(rad)) * patrolRadius;
+        Vector3 targetPos = patrolCenter + offset;
+
+        Vector3 dir = (targetPos - transform.position).normalized;
+        transform.position += dir * patrolSpeed * Time.deltaTime;
+        if (dir != Vector3.zero)
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), 0.1f);
+    }
+
+    void ChasePlayer(float distanceToPlayer)
+    {
+        Vector3 dir = (player.position - transform.position).normalized;
+        transform.position += dir * chaseSpeed * Time.deltaTime;
+        if (dir != Vector3.zero)
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), 0.2f);
+
+        if (distanceToPlayer <= attackDistance)
+        {
+            Attack();
+        }
+        else
+        {
+            if (animator != null)
+            {
+                animator.SetBool("Swimming", true);
+                animator.SetBool("Biting", false);
+            }
+            isAttacking = false;
+        }
+    }
+
+    void Attack()
+    {
+        if (isAttacking) return;
+        isAttacking = true;
+        if (animator != null)
+        {
+            animator.SetBool("Swimming", false);
+            animator.SetBool("Biting", true);
+        }
+        // Optionally: Add damage to player here
+    }
+}

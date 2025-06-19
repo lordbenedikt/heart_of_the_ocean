@@ -46,15 +46,17 @@ public class SharkBehavour : MonoBehaviour
             // Patrol in a circle
             Patrol();
         }
+
+        // Always update animator parameters based on state
+        if (animator != null)
+        {
+            animator.SetBool("Swimming", !isAttacking);
+            animator.SetBool("Biting", isAttacking);
+        }
     }
 
     void Patrol()
     {
-        if (animator != null)
-        {
-            animator.SetBool("Swimming", true);
-            animator.SetBool("Biting", false);
-        }
         isAttacking = false;
 
         patrolAngle += patrolTurnSpeed * Time.deltaTime;
@@ -72,44 +74,16 @@ public class SharkBehavour : MonoBehaviour
     {
         if (distanceToPlayer <= attackDistance)
         {
-            Attack();
+            // Stay in place and keep attacking
+            isAttacking = true;
+            // Optionally: Add damage to player here
             return;
         }
 
-        // Only move towards the player if not attacking
-        if (!isAttacking)
-        {
-            Vector3 dir = (player.position - transform.position).normalized;
-            transform.position += dir * chaseSpeed * Time.deltaTime;
-            if (dir != Vector3.zero)
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), 0.2f);
-
-            if (animator != null)
-            {
-                animator.SetBool("Swimming", true);
-                animator.SetBool("Biting", false);
-            }
-        }
-        else
-        {
-            // Stay in place and keep attacking
-            if (animator != null)
-            {
-                animator.SetBool("Swimming", false);
-                animator.SetBool("Biting", true);
-            }
-        }
-    }
-
-    void Attack()
-    {
-        if (isAttacking) return;
-        isAttacking = true;
-        if (animator != null)
-        {
-            animator.SetBool("Swimming", false);
-            animator.SetBool("Biting", true);
-        }
-        // Optionally: Add damage to player here
+        isAttacking = false;
+        Vector3 dir = (player.position - transform.position).normalized;
+        transform.position += dir * chaseSpeed * Time.deltaTime;
+        if (dir != Vector3.zero)
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), 0.2f);
     }
 }

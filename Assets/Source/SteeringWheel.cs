@@ -40,4 +40,6 @@ public class SteeringControl : MonoBehaviour, IMountable
         }
         shipRigidBody.linearVelocity = clampedVelocity;
     }
+
+    public void Activate() {}
 }

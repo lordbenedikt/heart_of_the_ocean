@@ -6,7 +6,7 @@ public class SharkBehavour : MonoBehaviour
     public float chaseSpeed = 6f;
     public float patrolRadius = 10f;
     public float detectionRadius = 15f;
-    public float attackDistance = 2f;
+    public float attackDistance = 3f;
     public float patrolTurnSpeed = 30f;
 
     public Transform player; // Exposed in inspector
@@ -70,23 +70,34 @@ public class SharkBehavour : MonoBehaviour
 
     void ChasePlayer(float distanceToPlayer)
     {
-        Vector3 dir = (player.position - transform.position).normalized;
-        transform.position += dir * chaseSpeed * Time.deltaTime;
-        if (dir != Vector3.zero)
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), 0.2f);
-
         if (distanceToPlayer <= attackDistance)
         {
             Attack();
+            return;
         }
-        else
+
+        // Only move towards the player if not attacking
+        if (!isAttacking)
         {
+            Vector3 dir = (player.position - transform.position).normalized;
+            transform.position += dir * chaseSpeed * Time.deltaTime;
+            if (dir != Vector3.zero)
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), 0.2f);
+
             if (animator != null)
             {
                 animator.SetBool("Swimming", true);
                 animator.SetBool("Biting", false);
             }
-            isAttacking = false;
+        }
+        else
+        {
+            // Stay in place and keep attacking
+            if (animator != null)
+            {
+                animator.SetBool("Swimming", false);
+                animator.SetBool("Biting", true);
+            }
         }
     }
 

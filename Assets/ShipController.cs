@@ -3,7 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class ShipController : MonoBehaviour
 {
-    public float acceleration = 10f;
+    public float acceleration = 6f;
     public float maxSpeed = 5f;
     private Rigidbody rb;
 
@@ -21,7 +21,7 @@ public class ShipController : MonoBehaviour
 
         // Only accelerate in X and Y, keep Z unchanged
         Vector3 inputDirection = new Vector3(moveX, moveY, 0f).normalized;
-        rb.AddForce(inputDirection * acceleration);
+        rb.AddForce(inputDirection * acceleration * rb.mass);
 
         // Clamp velocity to maxSpeed in X and Y
         Vector3 clampedVelocity = rb.linearVelocity;

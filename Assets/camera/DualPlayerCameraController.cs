@@ -13,15 +13,15 @@ public class DualPlayerCameraController : MonoBehaviour
     public Vector3 offset;
 
     [Header("Zoom")]
-    [Tooltip("The minimum field of view (zoomed in).")]
-    public float minFov = 20f;
-    [Tooltip("The maximum field of view (zoomed out).")]
-    public float maxFov = 60f;
+    [Tooltip("The minimum z value (zoomed in, closer to players).")]
+    public float minZ = -5f;
+    [Tooltip("The maximum z value (zoomed out, farther from players).")]
+    public float maxZ = -50f;
     [Tooltip("The speed of the scroll wheel zoom.")]
-    public float zoomSpeed = 25f;
+    public float zoomSpeed = 10f;
 
     private Camera cam;
-    private float initialZ;
+    private float currentZ;
 
     void Start()
     {
@@ -33,7 +33,7 @@ public class DualPlayerCameraController : MonoBehaviour
             return;
         }
         // Store the initial Z position of the camera.
-        initialZ = transform.position.z;
+        currentZ = transform.position.z;
     }
 
     void LateUpdate()
@@ -59,8 +59,8 @@ public class DualPlayerCameraController : MonoBehaviour
         // Use Lerp for a smooth transition.
         Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed * Time.deltaTime);
 
-        // Apply the new position but keep the original Z-axis value.
-        transform.position = new Vector3(smoothedPosition.x, smoothedPosition.y, initialZ);
+        // Apply the new position but keep the current Z-axis value (for zoom).
+        transform.position = new Vector3(smoothedPosition.x, smoothedPosition.y, currentZ);
     }
 
     void HandleZoom()
@@ -68,10 +68,12 @@ public class DualPlayerCameraController : MonoBehaviour
         // Get input from the mouse scroll wheel.
         float scroll = Input.GetAxis("Mouse ScrollWheel");
 
-        // Calculate the new field of view.
-        float newFov = cam.fieldOfView - scroll * zoomSpeed;
+        // Adjust the z position based on scroll input.
+        currentZ += scroll * zoomSpeed;
 
-        // Clamp the FOV to the defined min and max values.
-        cam.fieldOfView = Mathf.Clamp(newFov, minFov, maxFov);
+        // Clamp the z value to the defined min and max values.
+        currentZ = Mathf.Clamp(currentZ, maxZ, minZ); // Note: maxZ is more negative
+
+        // No longer change field of view.
     }
 }

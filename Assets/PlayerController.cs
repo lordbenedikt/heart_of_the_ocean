@@ -18,11 +18,6 @@ public class PlayerController2_5D : MonoBehaviour
     public float ceilingDistance = 0.3f;
     public LayerMask ceilingMask;
 
-    [Header("Steering Wheel")]
-    public bool useSteeringWheel = false;
-    public string steeringWheelHorizontalAxis = "SteeringWheel_Horizontal";
-    public string steeringWheelJumpButton = "SteeringWheel_Jump";
-
     private CharacterController controller;
     private Vector3 velocity;
     private bool isGrounded;
@@ -32,26 +27,28 @@ public class PlayerController2_5D : MonoBehaviour
     private Transform currentPlatform;
     private Vector3 platformLastPosition;
     private Vector3 platformDelta;
-    private GameObject? steeringWheel;
+
+    private IMountable? closestMountable;
+    private IMountable? mountedDevice;
 
     void Start()
     {
         controller = GetComponent<CharacterController>();
     }
-    
+
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("SteeringWheel"))
+        if (other.CompareTag("Mountable"))
         {
-            steeringWheel = other.gameObject;
+            closestMountable = other.gameObject.GetComponent<IMountable>();
         }
     }
 
     void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("SteeringWheel"))
+        if (other.CompareTag("Mountable"))
         {
-            steeringWheel = null;
+            closestMountable = null;
         }
     }
 
@@ -67,22 +64,30 @@ public class PlayerController2_5D : MonoBehaviour
 
         // Setting velocity.y to a small negative value helps keep the player grounded.
         if (isGrounded && velocity.y < 0)
-            velocity.y = -0.1f;
+            velocity.y = -1f;
 
         // Stop upward velocity if hitting ceiling
         if (isCeilinged && velocity.y > 0)
             velocity.y = 0f;
 
         // Movement input
-        float move;
-        bool jumpPressed;
+        float move = 0f;
+        bool jumpPressed = false;
 
-        if (useSteeringWheel)
+        if (mountedDevice != null)
         {
-            move = Input.GetAxis(steeringWheelHorizontalAxis);
+            float xAxisInput = Input.GetAxisRaw("Horizontal");
+            float yAxisInput = Input.GetAxisRaw("Vertical");
+
+            mountedDevice.Steer(xAxisInput, yAxisInput);
+
+            if (Input.GetButtonDown("Jump"))
+            {
+                closestMountable.Activate();
+            }
             if (Input.GetKeyDown(KeyCode.E))
             {
-                useSteeringWheel = false;
+                mountedDevice = null;
             }
         }
         else
@@ -90,7 +95,11 @@ public class PlayerController2_5D : MonoBehaviour
             move = Input.GetAxis("Horizontal");
             jumpPressed = Input.GetButtonDown("Jump");
             if (Input.GetKeyDown(KeyCode.E)) {
-                useSteeringWheel = true;
+                if (closestMountable != null)
+                {
+                    // Attempt to interact with the closest steering wheel
+                    mountedDevice = closestMountable;
+                }
             }
         }
 

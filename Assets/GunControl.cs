@@ -16,8 +16,8 @@ public class GunControl : MonoBehaviour, IMountable
     public void Activate()
     {
         GameObject obj = Instantiate(bulletPrefab, gunTip.position, gunTip.rotation);
-        Bullet bullet = obj.GetComponent<Bullet>();
-        bullet.velocity = gunTip.TransformDirection(Vector3.forward) * bulletSpeed;
+        Rigidbody bulletRb = obj.GetComponent<Rigidbody>();
+        bulletRb.linearVelocity = gunTip.TransformDirection(Vector3.forward) * bulletSpeed;
     }
 
     public void Steer(float horizontal, float vertical)

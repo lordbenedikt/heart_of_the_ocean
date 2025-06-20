@@ -56,11 +56,11 @@ public class PlayerController2_5D : MonoBehaviour
     {
         // Ground check
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-        Debug.Log($"Is Grounded: {isGrounded}");
+        //Debug.Log($"Is Grounded: {isGrounded}");
 
         // Ceiling check
         isCeilinged = Physics.CheckSphere(ceilingCheck.position, ceilingDistance, ceilingMask);
-        Debug.Log($"Is Ceilinged: {isCeilinged}");
+        //Debug.Log($"Is Ceilinged: {isCeilinged}");
 
         // Setting velocity.y to a small negative value helps keep the player grounded.
         if (isGrounded && velocity.y < 0)

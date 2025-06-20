@@ -25,65 +25,70 @@ ModelImporter:
       name: Pins.001
     second: {fileID: 2100000, guid: 2f2efa7dafda509439aadc993e442b4e, type: 2}
   - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: glow
+    second: {fileID: 2100000, guid: 8a18a025adc0f6349ac6cd273deab89f, type: 2}
+  - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Bolt_baseColor
-    second: {fileID: 2800000, guid: b0efc1f930414ce4580e001ef05ed6c9, type: 3}
+    second: {fileID: 2800000, guid: ee927d3a98709ca4ca115e28b600b552, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Bolt_metallicRoughness
-    second: {fileID: 2800000, guid: d4fb05ea2313f094dbb53816dac3cc2f, type: 3}
+    second: {fileID: 2800000, guid: 153d9bf38c6d2e141b1c4a2976678de5, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Bolt_normal
-    second: {fileID: 2800000, guid: 489f876baeea7104781446b06ac0b839, type: 3}
+    second: {fileID: 2800000, guid: f5ee08796c5349941a4aa2bdb60bb8a9, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Chain_baseColor
-    second: {fileID: 2800000, guid: 0923e0a4523863345b5c33e67f3bff35, type: 3}
+    second: {fileID: 2800000, guid: 1e951262b5c5ac24784014908972f1e2, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Chain_metallicRoughness
-    second: {fileID: 2800000, guid: 282647a72f8c1fa459fc2762fe066d93, type: 3}
+    second: {fileID: 2800000, guid: 61e1540ab883d1d438c0d627ef2c416c, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Chain_normal
-    second: {fileID: 2800000, guid: 8b4a0f7f1e1c15e4881b064f2f638694, type: 3}
+    second: {fileID: 2800000, guid: 92e7e93f91c26ef48b97a5f489af1df0, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Mine_baseColor
-    second: {fileID: 2800000, guid: 1a10524e04980be4bb591e730425b17c, type: 3}
+    second: {fileID: 2800000, guid: b312458d416b4464981b7baf2c16c56a, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Mine_metallicRoughness
-    second: {fileID: 2800000, guid: 80778a4267aa79645a60af7f568b221c, type: 3}
+    second: {fileID: 2800000, guid: 143b8ab1829062949b8f214aa4f0eae1, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Mine_normal
-    second: {fileID: 2800000, guid: f186478660550d34f92b5a59ff5191aa, type: 3}
+    second: {fileID: 2800000, guid: a448f10755c96244eb897d30d0d6882b, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Pins_baseColor
-    second: {fileID: 2800000, guid: cf86e303ef41746439b9867d09452bc1, type: 3}
+    second: {fileID: 2800000, guid: bf801a41ea194e548b8825b0c1e1e9cf, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Pins_metallicRoughness
-    second: {fileID: 2800000, guid: 0a0338ee83506e348b6a86626abf73a5, type: 3}
+    second: {fileID: 2800000, guid: 7e271f3e4cef5fd4bb4b2a7826824236, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Pins_normal
-    second: {fileID: 2800000, guid: 06e8cb1517b6d9a4c855169593fbb7f8, type: 3}
+    second: {fileID: 2800000, guid: cfae45196eca21f44be86b7c02ec8b92, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

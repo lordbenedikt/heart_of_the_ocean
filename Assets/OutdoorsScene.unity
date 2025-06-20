@@ -1297,6 +1297,9 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 75861aa326100bd468648733277c67e4, type: 3}
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 --- !u!1 &1823688464
 GameObject:
@@ -1669,7 +1672,11 @@ PrefabInstance:
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2573704fe4190ad4ca9d13ca46c1fc3c, type: 3}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 --- !u!1001 &3683554305134074181
+=======
+--- !u!1001 &6564035939864062123
+>>>>>>> Stashed changes
 =======
 --- !u!1001 &6564035939864062123
 >>>>>>> Stashed changes
@@ -1680,6 +1687,7 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
     - target: {fileID: 4671170407661634610, guid: 0c35bd513daf2684681a2bfd135f757e, type: 3}
       propertyPath: m_Name
@@ -1723,6 +1731,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5447248954553884296, guid: 0c35bd513daf2684681a2bfd135f757e, type: 3}
 =======
+=======
+>>>>>>> Stashed changes
     - target: {fileID: 5847326225811896573, guid: 75861aa326100bd468648733277c67e4, type: 3}
       propertyPath: m_Name
       value: mine
@@ -1764,6 +1774,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6516199124506223175, guid: 75861aa326100bd468648733277c67e4, type: 3}
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
@@ -1773,7 +1786,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   m_SourcePrefab: {fileID: 100100000, guid: 0c35bd513daf2684681a2bfd135f757e, type: 3}
+=======
+  m_SourcePrefab: {fileID: 100100000, guid: 75861aa326100bd468648733277c67e4, type: 3}
+>>>>>>> Stashed changes
 =======
   m_SourcePrefab: {fileID: 100100000, guid: 75861aa326100bd468648733277c67e4, type: 3}
 >>>>>>> Stashed changes

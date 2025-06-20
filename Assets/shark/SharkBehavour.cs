@@ -1,3 +1,4 @@
+using System.Timers;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -7,7 +8,7 @@ public class SharkBehavour : MonoBehaviour
     public float chaseSpeed = 6f;
     public float patrolRadius = 10f;
     public float detectionRadius = 15f;
-    public float attackDistance = 3f;
+    public float attackDistance = 6f;
     public float patrolTurnSpeed = 30f;
 
     public Transform player; // Exposed in inspector
@@ -18,9 +19,15 @@ public class SharkBehavour : MonoBehaviour
     private float patrolAngle = 0f;
     private bool isAttacking = false;
 
+    private Timer attackTimer; // Optional: Timer for attack cooldown
+    private Timer moveAway; // Optional: Timer for attack cooldown
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        attackTimer = new Timer(1000);
+        moveAway = new Timer(1000);
+
         rb = GetComponent<Rigidbody>();
         if (player == null)
             player = GameObject.FindGameObjectWithTag("Player")?.transform;
@@ -70,23 +77,28 @@ public class SharkBehavour : MonoBehaviour
         Vector3 nextPos = transform.position + dir * patrolSpeed * Time.deltaTime;
         rb.MovePosition(nextPos);
         if (dir != Vector3.zero)
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), 0.1f);
+            transform.rotation = Quaternion.Slerp(
+                transform.rotation,
+                Quaternion.LookRotation(dir),
+                0.1f
+            );
     }
 
     void ChasePlayer(float distanceToPlayer)
     {
-        if (distanceToPlayer <= attackDistance)
+        Vector3 dir = (player.position - transform.position).normalized;
+
+        if (distanceToPlayer > attackDistance)
         {
-            // Stay in place and keep attacking
-            isAttacking = true;
-            // Optionally: Add damage to player here
-            return;
+            Vector3 nextPos = transform.position + dir * chaseSpeed * Time.deltaTime;
+            rb.MovePosition(nextPos);
         }
 
-        isAttacking = false;
-        Vector3 dir = (player.position - transform.position).normalized;
-        transform.position += dir * chaseSpeed * Time.deltaTime;
         if (dir != Vector3.zero)
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), 0.2f);
+            transform.rotation = Quaternion.Slerp(
+                transform.rotation,
+                Quaternion.LookRotation(dir),
+                0.2f
+            );
     }
 }

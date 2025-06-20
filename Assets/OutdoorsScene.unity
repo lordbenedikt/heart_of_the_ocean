@@ -1299,6 +1299,9 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: 75861aa326100bd468648733277c67e4, type: 3}
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -1677,7 +1680,11 @@ PrefabInstance:
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 --- !u!1001 &3683554305134074181
+=======
+--- !u!1001 &6564035939864062123
+>>>>>>> Stashed changes
 =======
 --- !u!1001 &6564035939864062123
 >>>>>>> Stashed changes
@@ -1694,6 +1701,7 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
@@ -1801,7 +1809,11 @@ PrefabInstance:
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   m_SourcePrefab: {fileID: 100100000, guid: 0c35bd513daf2684681a2bfd135f757e, type: 3}
+=======
+  m_SourcePrefab: {fileID: 100100000, guid: 75861aa326100bd468648733277c67e4, type: 3}
+>>>>>>> Stashed changes
 =======
   m_SourcePrefab: {fileID: 100100000, guid: 75861aa326100bd468648733277c67e4, type: 3}
 >>>>>>> Stashed changes
